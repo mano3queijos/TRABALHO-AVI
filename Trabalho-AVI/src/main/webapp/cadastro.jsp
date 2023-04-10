@@ -18,6 +18,7 @@
 <title>cadastro de coordenadores</title>
 </head>
 <body>
+	<!-- Precisa FAZER MUUUUITA COISA AINDA MDS ainda(09/04/2023) -->
 
 	<section class="d-flex">
 		<div class="container">
@@ -26,7 +27,7 @@
 					<form>
 						<fieldset>
 							<div class=" col-md-12 panel panel-primary">
-								<div class="panel-heading">Cadastro de Coordenadores</div>
+								<div class="panel-heading mb-3">Cadastro de Coordenadores</div>
 							</div>
 
 
@@ -44,7 +45,7 @@
 								<label class="col-md-4 control-label" for="curso">Curso
 									a coordenar</label>
 								<div>
-									<input id="curso" name="curso" placeholder="Curso"
+									<input id="curso" name="curso" placeholder="Curso a Coordenar"
 										class="form-control input-md" type="text">
 								</div>
 							</div>
@@ -56,7 +57,7 @@
 									disponibilidade</label>
 
 								<div>
-									<input id="Data" name="Data" placeholder="Data"
+									<input id="Data" name="Data" placeholder="Data disponibilidade"
 										class="form-control input-md" type="text">
 								</div>
 
@@ -71,11 +72,12 @@
 
 
 
-							<div class="form-group mb-4">
+							<div class="form-group mb-1">
 								<label class="col-md-4 control-label" for="Nome">Hoário
 									de disponibilidade</label>
 								<div>
-									<input id="Nome" name="Nome" placeholder="Data Disponibilidade"
+									<input id="Nome" name="Nome"
+										placeholder="Horário Disponibilidade"
 										class="form-control input-md" type="text">
 								</div>
 							</div>
@@ -113,6 +115,8 @@
 								<div class="col-md-8">
 									<button id="Prosseguir" name="prosseguir"
 										class="btn btn-success" type="Submit">prosseguir</button>
+								
+									
 
 									<button id="Cancelar" name="Cancelar" class="btn btn-danger"
 										type="Reset">Cancelar</button>
