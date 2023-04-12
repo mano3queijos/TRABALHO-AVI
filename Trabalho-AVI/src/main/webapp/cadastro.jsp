@@ -22,115 +22,101 @@
 
 	<section class="d-flex">
 		<div class="container">
-			<div class="row justify-content-md-center">
-				<div class="col col-md-8">
-					<form>
-						<fieldset>
-							<div class=" col-md-12 panel panel-primary">
-								<div class="panel-heading mb-3">Cadastro de Coordenadores</div>
+			<div class="row justify-content-center">
+				<form action="./app" method="post" class="col col-md-10">
+					<div class="">
+
+						<div class="panel panel-primary">
+							<div class="mb-3 display-3 h5">Cadastro de Coordenadores</div>
+						</div>
+
+
+						<div class="form-group mb-4">
+							<label class="control-label h5" for="Nome"> Nome do
+								Coordenador </label>
+
+
+							<div>
+								<input name="Nome" placeholder="Nome do coordenador"
+									class="form-control" type="text">
+							</div>
+						</div>
+
+
+						<div class="form-group mb-4">
+							<label class="col-md-5 control-label h5" for="date">Data
+								de disponibilidade</label>
+
+							<div>
+								<input name="Data" placeholder="Data disponibilidade"
+									class="form-control " type="text">
 							</div>
 
+						</div>
 
-							<div class="form-group mb-4">
-								<label class="col-md-5 control-label" for="Nome">Nome do
-									Coordenador </label>
+
+
+						<div class="row">
+
+							<div class="form-group mb-4 col-md-6">
+								<label class="control-label h5" for="curso">Horario
+									inicial</label>
 								<div>
-									<input id="Nome" name="Nome" placeholder="Nome do coordenador"
-										class="form-control input-md" type="text">
+									<input name="horarioInicial" placeholder="horario inicial"
+										class="form-control" type="text">
 								</div>
 							</div>
 
+							<div class="form-group mb-4 col-md-6">
 
-							<div class="form-group mb-4">
-								<label class="col-md-4 control-label" for="curso">Curso
-									a coordenar</label>
+
+								<label class="control-label h5" for="curso">Horario
+									final</label>
 								<div>
-									<input id="curso" name="curso" placeholder="Curso a Coordenar"
-										class="form-control input-md" type="text">
+									<input name="horaFinal" placeholder="horario final"
+										class="form-control" type="text">
 								</div>
 							</div>
 
 
+						</div>
 
-							<div class="form-group mb-4">
-								<label class="col-md-5 control-label" for="date">Data de
-									disponibilidade</label>
 
-								<div>
-									<input id="Data" name="Data" placeholder="Data disponibilidade"
-										class="form-control input-md" type="text">
-								</div>
+						<div class="form-group mb-4">
+							<label class="col-md-4 control-label h5" for="curso">Quantidade
+								de cursos a coordenar</label>
+
+
+							<div>
+								<input name="qtdCursos" placeholder="Qtd cursos a coordenar"
+									class="form-control" type="text" /> <span style="color: red;">${erro}</span><br>
 
 							</div>
 
-
-							<script type="text/javascript">
-								$(function() {
-									$('#datepicker').datepicker();
-								})
-							</script>
+						</div>
 
 
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="prosseguir"></label>
+							<div class="col-md-8">
+								<button type="submit" name="prosseguir" class="btn btn-success"
+									type="Submit">prosseguir</button>
 
-							<div class="form-group mb-1">
-								<label class="col-md-4 control-label" for="Nome">Hoário
-									de disponibilidade</label>
-								<div>
-									<input id="Nome" name="Nome"
-										placeholder="Horário Disponibilidade"
-										class="form-control input-md" type="text">
-								</div>
+
+								<button type="submit" name="Cancelar" class="btn btn-danger"
+									type="Reset">Cancelar</button>
 							</div>
+						</div>
+					</div>
 
+				</form>
 
-
-
-
-
-							<!-- 	<div class="form-group">
-
-
-								<label class="col-md-5 control-label" for="qtdCursos">
-									Quantidade cursos a coordenar</label>
-								<div>
-
-									<select class="form-control  col-md-4"
-										id="exampleFormControlSelect1">
-
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-
-									</select>
-
-
-								</div>
-							</div> -->
-
-
-							<div class="form-group">
-								<label class="col-md-2 control-label" for="prosseguir"></label>
-								<div class="col-md-8">
-									<button id="Prosseguir" name="prosseguir"
-										class="btn btn-success" type="Submit">prosseguir</button>
-								
-									
-
-									<button id="Cancelar" name="Cancelar" class="btn btn-danger"
-										type="Reset">Cancelar</button>
-								</div>
-							</div>
-						</fieldset>
-					</form>
-
-				</div>
 			</div>
 		</div>
 
-	</section>
 
+
+	</section>
 
 
 
