@@ -4,7 +4,12 @@ public class Curso {
 
 	private String nomeCurso;
 
+	public Curso() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Curso(String nomeCurso) {
+		super();
 		this.nomeCurso = nomeCurso;
 	}
 
@@ -14,6 +19,11 @@ public class Curso {
 
 	public void setNomeCurso(String nomeCurso) {
 		this.nomeCurso = nomeCurso;
+	}
+
+	@Override
+	public String toString() {
+		return "Curso [nomeCurso=" + nomeCurso + "]";
 	}
 
 }

@@ -35,10 +35,13 @@
 						<label class="col-md-5 control-label h5" for="curso">Cadastrar
 							curso</label>
 
-						<c:forEach begin="0" end="${qtdCursos-1}" varStatus="loop">
-							<input name="Nome" placeholder="Cadastrar Curso"
-								class="form-control mb-4">
+
+						<c:forEach begin="0" end="${qtdCursos-1}"
+							varStatus="loop">
+							<input name="nomeCursos-${nomeCursos}"
+								placeholder="Cadastrar Curso" class="form-control mb-4">
 						</c:forEach>
+
 
 
 						<div class="form-group">
