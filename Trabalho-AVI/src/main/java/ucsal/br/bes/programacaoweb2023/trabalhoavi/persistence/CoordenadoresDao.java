@@ -8,7 +8,9 @@ import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Coordenador;
 public class CoordenadoresDao {
 
 	private static List<Coordenador> coordenadores = new ArrayList<>();
-
+	
+	
+	
 	public static void adicionar(Coordenador coordenador) {
 		coordenadores.add(coordenador);
 	}

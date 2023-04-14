@@ -5,40 +5,46 @@ import java.time.LocalTime;
 
 public class PeriodoDisponibilidade {
 
-	private LocalDate diaDisponibilidade;
-	private LocalTime horaInicialAtendimento;
-	private LocalTime horaFinalAtendimento;
+	private String diaDisponibilidade;
+	private String horaInicialAtendimento;
+	private String horaFinalAtendimento;
 
-	public PeriodoDisponibilidade(LocalDate diaDisponibilidade, LocalTime horaInicialAtendimento,
-			LocalTime horaFinalAtendimento) {
+	public PeriodoDisponibilidade(String diaDisponibilidade, String horaInicialAtendimento,
+			String horaFinalAtendimento) {
 		super();
 		this.diaDisponibilidade = diaDisponibilidade;
 		this.horaInicialAtendimento = horaInicialAtendimento;
 		this.horaFinalAtendimento = horaFinalAtendimento;
 	}
 
-	public LocalDate getDiaDisponibilidade() {
+	public String getDiaDisponibilidade() {
 		return diaDisponibilidade;
 	}
 
-	public void setDiaDisponibilidade(LocalDate diaDisponibilidade) {
+	public void setDiaDisponibilidade(String diaDisponibilidade) {
 		this.diaDisponibilidade = diaDisponibilidade;
 	}
 
-	public LocalTime getHoraInicialAtendimento() {
+	public String getHoraInicialAtendimento() {
 		return horaInicialAtendimento;
 	}
 
-	public void setHoraInicialAtendimento(LocalTime horaInicialAtendimento) {
+	public void setHoraInicialAtendimento(String horaInicialAtendimento) {
 		this.horaInicialAtendimento = horaInicialAtendimento;
 	}
 
-	public LocalTime getHoraFinalAtendimento() {
+	public String getHoraFinalAtendimento() {
 		return horaFinalAtendimento;
 	}
 
-	public void setHoraFinalAtendimento(LocalTime horaFinalAtendimento) {
+	public void setHoraFinalAtendimento(String horaFinalAtendimento) {
 		this.horaFinalAtendimento = horaFinalAtendimento;
+	}
+
+	@Override
+	public String toString() {
+		return "PeriodoDisponibilidade [diaDisponibilidade=" + diaDisponibilidade + ", horaInicialAtendimento="
+				+ horaInicialAtendimento + ", horaFinalAtendimento=" + horaFinalAtendimento + "]";
 	}
 
 }

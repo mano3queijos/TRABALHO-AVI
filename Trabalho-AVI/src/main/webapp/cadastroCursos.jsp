@@ -25,10 +25,60 @@
 		<div class="container">
 			<div class="row justify-content-center">
 
-				<form action="./app" method="get" class="col col-md-10">
+				<form action="./app" method="post" class="col col-md-10">
 
 					<div class="panel panel-primary">
 						<div class="mb-3 display-3 h5">Cadastro de Coordenadores</div>
+					</div>
+
+
+					<div class="form-group mb-4">
+						<label class="control-label h5" for="Nome"> Nome do
+							Coordenador </label>
+
+
+						<div>
+							<input name="nome" placeholder="Nome do coordenador"
+								class="form-control" type="text">
+						</div>
+					</div>
+
+
+					<div class="form-group mb-4">
+						<label class="col-md-5 control-label h5" for="date">Data
+							de disponibilidade</label>
+
+						<div>
+							<input name="Data" placeholder="Data disponibilidade"
+								class="form-control " type="text">
+						</div>
+
+					</div>
+
+
+
+					<div class="row">
+
+						<div class="form-group mb-4 col-md-6">
+							<label class="control-label h5" for="curso">Horario
+								inicial</label>
+							<div>
+								<input name="horarioInicial" placeholder="horario inicial"
+									class="form-control" type="text">
+							</div>
+						</div>
+
+						<div class="form-group mb-4 col-md-6">
+
+
+							<label class="control-label h5" for="curso">Horario final</label>
+							<div>
+								<input name="horaFinal" placeholder="horario final"
+									class="form-control" type="text">
+							</div>
+						</div>
+
+
 					</div>
 
 					<div class="form-group mb-4 col-md-6">
@@ -37,10 +87,10 @@
 
 
 						<c:forEach begin="0" end="${qtdCursos-1}" varStatus="loop">
-						
-							<input name="nomeCursos${loop.index}" placeholder="Cadastrar Curso"
-								class="form-control mb-4">
-							
+
+							<input name="nomeCursos${loop.index}"
+								placeholder="Cadastrar Curso" class="form-control mb-4">
+
 						</c:forEach>
 
 
@@ -52,7 +102,7 @@
 
 
 								<button type="submit" name="Cancelar" class="btn btn-danger"
-									type="Reset">Cancelar</button>
+									type="submit">Cancelar</button>
 							</div>
 						</div>
 

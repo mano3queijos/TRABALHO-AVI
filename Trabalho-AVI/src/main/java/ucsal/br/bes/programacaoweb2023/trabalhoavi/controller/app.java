@@ -1,6 +1,9 @@
 package ucsal.br.bes.programacaoweb2023.trabalhoavi.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,82 +22,58 @@ import ucsal.br.bes.programacaoweb2023.trabalhoavi.persistence.CoordenadoresDao;
 @WebServlet("/app")
 public class app extends HttpServlet {
 
+	private boolean acaoRealizada = false;
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		String nome = req.getParameter("nome");
-		String dataDisponibilidade = req.getParameter("dataDisponibilidade");
-		String horaInicial = req.getParameter("horarioInicial");
-		String horaFinal = req.getParameter("horaFinal");
-		List<Curso> cursos = new ArrayList<>();
-		List<PeriodoDisponibilidade> periodoDisponibilidade = new ArrayList<>();
-		
-		PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(null, null, null); 
-		
-		
-		
-		
-		
-//		fazer conversão de string para ldt quando acordar, boa 10 horas de sono emaul s2
-		for (int i = 0; i <= 10; i++) {
-			String nomeCurso = req.getParameter("nomeCursos" + i);
-			if (nomeCurso != null && !nomeCurso.isEmpty()) {
-				Curso curso = new Curso(nomeCurso);
-				cursos.add(curso);
-			}
-		}
-		req.setAttribute("nomeCursos", cursos);
-		req.getRequestDispatcher("index.jsp").forward(req, resp);
-
-		Coordenador coordenador = new Coordenador(horaFinal, cursos, null);
-		CoordenadoresDao.adicionar(coordenador);
-
-		for (Coordenador coordenadowr : CoordenadoresDao.listarCoordenadores()) {
-			System.out.println(coordenadowr);
-		}
-
-	}
+//	Aqui precisa ter apenas um dopost, pq preciso fazer a confirmação das outras
+	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String qtdCursos = req.getParameter("qtdCursos");
-
-//		fazer get cursos quando voltar da praia
-
 		try {
 
-//			Transformando a string em numero, fazendo o tratamento de erro(caso exista) e mandando a quantidade de cursos escolhidos para a jsp que irá cadastra apenas cursos
+			List<Curso> cursos = new ArrayList<>();
 
-			Integer numeroRepetir = Integer.parseInt(qtdCursos);
-			Coordenador.validarQtdCuros(numeroRepetir);
+			for (int i = 0; i <= 10; i++) {
+				String nomeCurso = req.getParameter("nomeCursos" + i);
+				if (nomeCurso != null && !nomeCurso.isEmpty()) {
+					Curso curso = new Curso(nomeCurso);
+					cursos.add(curso);
+				}
+			}
 
-			req.setAttribute("qtdCursos", numeroRepetir);
+			String dataDisponibilidade = req.getParameter("dataDisponibilidade");
+			String horaInicial = req.getParameter("horarioInicial");
+			String horaFinal = req.getParameter("horaFinal");
+			List<PeriodoDisponibilidade> periodoDisponibilidade = new ArrayList<>();
 
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./cadastroCursos.jsp");
-			requestDispatcher.forward(req, resp);
+			PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(dataDisponibilidade, horaInicial, horaFinal);
+			periodoDisponibilidade.add(periodo);
 
-		} catch (
+			String nome = req.getParameter("nome");
+			Coordenador coordenador = new Coordenador(nome, cursos, periodoDisponibilidade);
+			CoordenadoresDao.adicionar(coordenador);
+//			
+//			teste listar coordenadores
+//			req.setAttribute("coordenadores", CoordenadoresDao.listarCoordenadores());
+//			
+//			req.getRequestDispatcher("exibirCoordenadores.jsp").forward(req, resp);;
 
-		NumberFormatException e) {
+			for (Coordenador mostra : CoordenadoresDao.listarCoordenadores()) {
+				System.out.println(mostra);
+			}
 
-			String mensagem = "Por favor, insira apenas numero";
-			req.setAttribute("erro", mensagem);
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./cadastro.jsp");
-			requestDispatcher.forward(req, resp);
-
-		} catch (ValidarException e) {
-			req.setAttribute("erro", e.getMessage());
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./cadastro.jsp");
-			requestDispatcher.forward(req, resp);
+		} catch (Exception e) {
+			System.out.println("eu não faço a minima ideia kkkkkkkkkkkkk");
 
 		}
 
-	}
+		
 
+	}
 }
