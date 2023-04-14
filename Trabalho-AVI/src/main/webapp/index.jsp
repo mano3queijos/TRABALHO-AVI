@@ -9,8 +9,9 @@
 </head>
 <body>
 
-	<c:forEach items="${cursoNomes}" var="Cusonomes">
-		<p>${cursoNomes}</p>
+	<c:forEach begin="0" end="10" varStatus="loop"
+		items="${nomeCursos}" var="nomeCursos">
+		<p>${nomeCursos}</p>
 	</c:forEach>
 
 </body>

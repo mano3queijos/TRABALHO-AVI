@@ -21,4 +21,8 @@ public class CoordenadoresDao {
 	public static void atualizar(Integer posAtt, Coordenador coordenador) {
 		coordenadores.set(posAtt, coordenador);
 	}
+
+	public static List<Coordenador> listarCoordenadores() {
+		return new ArrayList<>(coordenadores);
+	}
 }

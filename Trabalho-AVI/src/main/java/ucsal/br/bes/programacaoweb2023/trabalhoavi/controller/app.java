@@ -2,7 +2,6 @@ package ucsal.br.bes.programacaoweb2023.trabalhoavi.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import br.ucsal.bes.programacaoweb2023.trabalhoavi.exception.ValidarException;
@@ -13,6 +12,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Coordenador;
+import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Curso;
+import ucsal.br.bes.programacaoweb2023.trabalhoavi.persistence.CoordenadoresDao;
 
 @WebServlet("/app")
 public class app extends HttpServlet {
@@ -23,14 +24,37 @@ public class app extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String nome = req.getParameter("nome");
 		String dataDisponibilidade = req.getParameter("dataDisponibilidade");
 		String horaInicial = req.getParameter("horarioInicial");
 		String horaFinal = req.getParameter("horaFinal");
+		List<Curso> cursos = new ArrayList<>();
+
+		for (int i = 0; i <= 10; i++) {
+			String nomeCurso = req.getParameter("nomeCursos" + i);
+			if (nomeCurso != null && !nomeCurso.isEmpty()) {
+				Curso curso = new Curso(nomeCurso);
+				cursos.add(curso);
+			}
+		}
+		req.setAttribute("nomeCursos", cursos);
+		req.getRequestDispatcher("index.jsp").forward(req, resp);
+
+		Coordenador coordenador = new Coordenador(horaFinal, cursos, null);
+		CoordenadoresDao.adicionar(coordenador);
+		
+		for(Coordenador coordenadowr: CoordenadoresDao.listarCoordenadores()) {
+			System.out.println(coordenadowr);
+		}
+		
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		String qtdCursos = req.getParameter("qtdCursos");
-		String nomeCurso = req.getParameter("nomeCurso");
 
 //		fazer get cursos quando voltar da praia
 
@@ -46,27 +70,6 @@ public class app extends HttpServlet {
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./cadastroCursos.jsp");
 			requestDispatcher.forward(req, resp);
 
-			List<String> cursos = new ArrayList<>();
-			Enumeration<String> parametros = req.getParameterNames();
-			while (parametros.hasMoreElements()) {
-				String parametro = parametros.nextElement();
-				if (parametro.startsWith("nomeCursos-")) {
-					cursos.add(req.getParameter(parametro));
-
-				}
-			}
-//			req.setAttribute("nomeCursos", cursos);
-//			req.getRequestDispatcher("exibirNomes.jsp").forward(req, resp);
-
-			/*
-			 * Curso curso = new Curso(nomeCurso);
-			 */
-//			Coordenador coordenador = new Coordenador(nomeCurso, cursos, null);
-			/*
-			 * coordenador.getCursos().add(curso);
-			 * 
-			 * System.out.println(coordenador); System.out.println(cursos);
-			 */
 		} catch (
 
 		NumberFormatException e) {
