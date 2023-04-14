@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Coordenador;
 import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Curso;
+import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.PeriodoDisponibilidade;
 import ucsal.br.bes.programacaoweb2023.trabalhoavi.persistence.CoordenadoresDao;
 
 @WebServlet("/app")
@@ -31,7 +32,15 @@ public class app extends HttpServlet {
 		String horaInicial = req.getParameter("horarioInicial");
 		String horaFinal = req.getParameter("horaFinal");
 		List<Curso> cursos = new ArrayList<>();
-
+		List<PeriodoDisponibilidade> periodoDisponibilidade = new ArrayList<>();
+		
+		PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(null, null, null); 
+		
+		
+		
+		
+		
+//		fazer conversão de string para ldt quando acordar, boa 10 horas de sono emaul s2
 		for (int i = 0; i <= 10; i++) {
 			String nomeCurso = req.getParameter("nomeCursos" + i);
 			if (nomeCurso != null && !nomeCurso.isEmpty()) {
@@ -44,11 +53,11 @@ public class app extends HttpServlet {
 
 		Coordenador coordenador = new Coordenador(horaFinal, cursos, null);
 		CoordenadoresDao.adicionar(coordenador);
-		
-		for(Coordenador coordenadowr: CoordenadoresDao.listarCoordenadores()) {
+
+		for (Coordenador coordenadowr : CoordenadoresDao.listarCoordenadores()) {
 			System.out.println(coordenadowr);
 		}
-		
+
 	}
 
 	@Override
