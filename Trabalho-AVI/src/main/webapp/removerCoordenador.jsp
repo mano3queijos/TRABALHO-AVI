@@ -33,15 +33,10 @@
 
 			<div class="d-flex flex-wrap">
 
-
-
-
 				<div class="table-responsive col-md-12 mx-auto">
 
-
-
 					<table
-						class="col-md-10 table table-hover table-bordered w-75 mx-auto"
+						class="col-md-12 table table-hover table-bordered w-75 mx-auto"
 						style="font-size: 18px;">
 
 						<thead class="table-dark">
@@ -50,7 +45,6 @@
 								<th class="text-center" scope="col">Nome</th>
 								<th class="text-center" scope="col">Cursos</th>
 								<th class="text-center" scope="col">Disponibilidade</th>
-								<th class="text-center" scope="col">Excluir</th>
 							</tr>
 
 
@@ -60,11 +54,6 @@
 
 							<c:forEach var="coordenadores" items="${coordenadores}">
 
-								<form class="col-md-2" action="seu_action" method="post">
-
-									<button type="submit" class="btn btn-primary">Enviar</button>
-								</form>
-
 								<tr>
 									<td class="text-center"><c:out
 											value="${coordenadores.nome}" /></td>
@@ -72,15 +61,10 @@
 											value="${coordenadores.cursos}" /></td>
 									<td class="text-center"><c:out
 											value="${coordenadores.disponibilidade}" /></td>
-									<td class="text-center">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" value="1"
-												name="opcao1" id="opcao1"> <label
-												class="form-check-label" for="opcao1"></label>
-										</div>
-									</td>
 
 								</tr>
+
+
 							</c:forEach>
 
 
@@ -89,12 +73,46 @@
 
 
 					</table>
+
+					<form action="./excluirCoordenadores" method="get"
+						class="col col-md-12  table-bordered w-75 mx-auto">
+
+
+						<div class="form-group mb-4">
+							<label class="control-label h5" for="Nome"> Nome do
+								Coordenador a ser excluido</label>
+
+
+							<div>
+								<input name="nome" placeholder="Nome do coordenador"
+									class="form-control" type="text">
+							</div>
+						</div>
+
+
+
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="prosseguir"></label>
+							<div class="">
+								<button type="submit" name="prosseguir" class="btn btn-success"
+									type="Submit">prosseguir</button>
+
+
+								<button type="submit" name="Cancelar" class="btn btn-danger"
+									type="submit">Cancelar</button>
+							</div>
+						</div>
+					</form>
+
 				</div>
 
 
-
 			</div>
+
+
+
 		</div>
+	</div>
 
 
 

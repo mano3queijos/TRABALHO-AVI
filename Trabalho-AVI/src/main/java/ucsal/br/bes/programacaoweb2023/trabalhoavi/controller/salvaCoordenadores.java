@@ -34,9 +34,11 @@ public class salvaCoordenadores extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		List<Coordenador> coordenadores = (List<Coordenador>) req.getSession().getAttribute("coordenadores");
+
 //		
 //		teste listar coordenadores
-		req.setAttribute("coordenadores", CoordenadoresDao.listarCoordenadores());
+		req.setAttribute("coordenadores", coordenadores);
 
 		req.getRequestDispatcher("exibirCoordenadores.jsp").forward(req, resp);
 
@@ -71,6 +73,8 @@ public class salvaCoordenadores extends HttpServlet {
 				System.out.println(mostra.getDisponibilidade());
 			}
 			
+			req.getSession().setAttribute("coordenadores",CoordenadoresDao.listarCoordenadores());
+
 			resp.sendRedirect("./index.jsp");
 
 		} catch (Exception e) {

@@ -72,7 +72,30 @@
 
 
 
+
 				</table>
+
+
+
+				<div class="col col-md-12  w-75 mx-auto">
+
+
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="prosseguir"></label>
+						<div>
+							<a href="./index.jsp">
+
+								<button type="submit" name="prosseguir" class="btn btn-success"
+									type="Submit">Voltar Para Menu Inicial</button>
+
+
+							</a>
+						
+						</div>
+					</div>
+
+
+				</div>
 
 
 			</div>
