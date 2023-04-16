@@ -31,6 +31,7 @@
 					<div class="panel panel-primary col-md-12">
 						<div class="mb-3 display-3 h5">Cadastro de Coordenadores</div>
 					</div>
+					<span style="color: red;">${erroCadastro}</span><br>
 
 
 					<div class="form-group mb-0">

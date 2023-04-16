@@ -36,13 +36,13 @@
 							Coordenador</button>
 					</a>
 
-					<form action="./app" method="post">
+					<form action="./app" method="get">
 						<button type="submit" class="btn btn-primary btn-lg btn-block">Exibir
 							coordenadores Cadastrados</button>
 					</form>
 
 
-					<form action="./excluirCoordenadores" method="post">
+					<form action="./excluirCoordenadores" method="get">
 						<button type="submit" class="btn btn-primary btn-lg btn-block">excluir
 							coordenadores</button>
 					</form>

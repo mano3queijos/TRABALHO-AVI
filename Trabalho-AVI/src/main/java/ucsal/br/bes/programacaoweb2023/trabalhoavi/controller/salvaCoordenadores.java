@@ -1,11 +1,10 @@
 package ucsal.br.bes.programacaoweb2023.trabalhoavi.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.ucsal.bes.programacaoweb2023.trabalhoavi.exception.ValidarException;
 import jakarta.servlet.RequestDispatcher;
@@ -32,7 +31,7 @@ public class salvaCoordenadores extends HttpServlet {
 //	Aqui precisa ter apenas um dopost, pq preciso fazer a confirmação das outras
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		List<Coordenador> coordenadores = (List<Coordenador>) req.getSession().getAttribute("coordenadores");
 
@@ -45,12 +44,12 @@ public class salvaCoordenadores extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 
 		try {
 
 			List<Curso> cursos = new ArrayList<>();
-
 			for (int i = 0; i <= 10; i++) {
 				String nomeCurso = req.getParameter("nomeCursos" + i);
 				if (nomeCurso != null && !nomeCurso.isEmpty()) {
@@ -58,27 +57,30 @@ public class salvaCoordenadores extends HttpServlet {
 					cursos.add(curso);
 				}
 			}
+
 			List<PeriodoDisponibilidade> periodoDisponibilidade = new ArrayList<>();
 			String dia = req.getParameter("dia");
+
 			String horaInicial = req.getParameter("horarioInicial");
+
 			String horaFinal = req.getParameter("horaFinal");
+			String nome = req.getParameter("nome");
+
 			PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(dia, horaInicial, horaFinal);
 			periodoDisponibilidade.add(periodo);
 
-			String nome = req.getParameter("nome");
 			Coordenador coordenador = new Coordenador(nome, cursos, periodoDisponibilidade);
+
 			CoordenadoresDao.adicionar(coordenador);
 
-			for (Coordenador mostra : CoordenadoresDao.listarCoordenadores()) {
-				System.out.println(mostra.getDisponibilidade());
-			}
-			
-			req.getSession().setAttribute("coordenadores",CoordenadoresDao.listarCoordenadores());
+			req.getSession().setAttribute("coordenadores", CoordenadoresDao.listarCoordenadores());
 
 			resp.sendRedirect("./index.jsp");
 
 		} catch (Exception e) {
-			System.out.println("eu não faço a minima ideia kkkkkkkkkkkkk");
+			req.setAttribute("erroCadastro", e.getMessage());
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./cadastro.jsp");
+			requestDispatcher.forward(req, resp);
 
 		}
 

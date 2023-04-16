@@ -8,14 +8,27 @@ import jakarta.servlet.RequestDispatcher;
 
 public class Coordenador {
 
+	private Integer id;
 	private String nome;
 	private List<Curso> cursos = new ArrayList<>();
 	private List<PeriodoDisponibilidade> disponibilidade = new ArrayList<>();
 
+	private static int index = 0;
+
 	public Coordenador(String nome, List<Curso> cursos, List<PeriodoDisponibilidade> disponibilidade) {
+
+		index = index + 1;
 		this.nome = nome;
 		this.cursos = cursos;
 		this.disponibilidade = disponibilidade;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -59,6 +72,25 @@ public class Coordenador {
 			String mensagem = "O coordenador não pode coordenar um numero negativo de cursos";
 			throw new ValidarException(mensagem);
 
+		}
+
+	}
+
+	public static void validarCadastroCursos(String nome, String dia, String horaInicial, String horaFinal)
+			throws ValidarException {
+
+		if (nome == null | dia == null | horaInicial == null | horaFinal == null) {
+			String mensagem = "Nenhum campo não pode estar vazio, coordenador não cadastrado";
+			throw new ValidarException(mensagem);
+		}
+
+	}
+
+	public static void validarNomeCurso(String nomeCurso) throws ValidarException {
+
+		if (nomeCurso == null) {
+			String mensagem = "Nenhum campo pode estar vazio, coordenador não cadastrado";
+			throw new ValidarException(mensagem);
 		}
 
 	}

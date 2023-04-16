@@ -8,9 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Coordenador;
-import ucsal.br.bes.programacaoweb2023.trabalhoavi.persistence.CoordenadoresDao;
 
 @WebServlet("/excluirCoordenadores")
 public class ExcluirCoordenadoresController extends HttpServlet {
@@ -21,7 +19,7 @@ public class ExcluirCoordenadoresController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		List<Coordenador> coordenadores = (List<Coordenador>) req.getSession().getAttribute("coordenadores");
 
@@ -41,12 +39,11 @@ public class ExcluirCoordenadoresController extends HttpServlet {
 		resp.sendRedirect("./index.jsp");
 //		resp.sendRedirect("./exibirCoordenadores.jsp");
 //
-		HttpSession session = req.getSession();
 
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		List<Coordenador> coordenadores = (List<Coordenador>) req.getSession().getAttribute("coordenadores");
 

@@ -74,7 +74,7 @@
 
 					</table>
 
-					<form action="./excluirCoordenadores" method="get"
+					<form action="./excluirCoordenadores" method="post"
 						class="col col-md-12  table-bordered w-75 mx-auto">
 
 

@@ -25,7 +25,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 
-				<form action="./app" method="get" class="col col-md-10">
+				<form action="./app" method="post" class="col col-md-10">
 
 					<div class="panel panel-primary">
 						<div class="mb-3 display-3 h5">Cadastro de Coordenadores</div>
@@ -37,20 +37,23 @@
 							Coordenador </label>
 
 
+
 						<div>
 							<input name="nome" placeholder="Nome do coordenador"
-								class="form-control" type="text">
+								class="form-control" type="text"> <span
+								style="color: red;">${erro}</span><br>
 						</div>
 					</div>
 
 
 					<div class="form-group mb-4">
-						<label class="col-md-5 control-label h5" for="dia">Data
-							de disponibilidade</label>
+						<label class="col-md-5 control-label h5" for="dia">Data de
+							disponibilidade</label>
 
 						<div>
 							<input name="dia" placeholder="Data disponibilidade"
-								class="form-control" type="text">
+								class="form-control" type="text"> <span
+								style="color: red;">${erro}</span><br>
 						</div>
 
 					</div>
@@ -64,7 +67,8 @@
 								inicial</label>
 							<div>
 								<input name="horarioInicial" placeholder="horario inicial"
-									class="form-control" type="text">
+									class="form-control" type="text"> <span
+									style="color: red;">${erro}</span><br>
 							</div>
 						</div>
 
@@ -74,7 +78,8 @@
 							<label class="control-label h5" for="curso">Horario final</label>
 							<div>
 								<input name="horaFinal" placeholder="horario final"
-									class="form-control" type="text">
+									class="form-control" type="text"> <span
+									style="color: red;">${erro}</span><br>
 							</div>
 						</div>
 
@@ -86,28 +91,30 @@
 							curso</label>
 
 
-						<c:forEach begin="0" end="${qtdCursos-1}" varStatus="loop">
+						<c:forEach begin="0" end="${qtdCursos}" varStatus="loop">
 
 							<input name="nomeCursos${loop.index}"
 								placeholder="Cadastrar Curso" class="form-control mb-4">
 
+							<br>
 						</c:forEach>
 
 
-						<div class="form-group">
-							<label class="col-md-2 control-label" for="prosseguir"></label>
-							<div class="col-md-8">
-								<button type="submit" name="prosseguir" class="btn btn-success"
-									type="Submit">prosseguir</button>
-
-
-								<button type="submit" name="Cancelar" class="btn btn-danger"
-									type="submit">Cancelar</button>
-							</div>
-						</div>
-
-
 					</div>
+
+
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="prosseguir"></label>
+						<div class="col-md-8">
+							<button type="submit" name="prosseguir" class="btn btn-success"
+								type="Submit">Salvar Coordenador</button>
+
+
+							<button type="submit" name="Cancelar" class="btn btn-danger"
+								type="submit">Cancelar</button>
+						</div>
+					</div>
+
 
 				</form>
 			</div>
