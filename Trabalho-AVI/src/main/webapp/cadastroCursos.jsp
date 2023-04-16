@@ -25,7 +25,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 
-				<form action="./app" method="post" class="col col-md-10">
+				<form action="./app" method="get" class="col col-md-10">
 
 					<div class="panel panel-primary">
 						<div class="mb-3 display-3 h5">Cadastro de Coordenadores</div>
@@ -45,12 +45,12 @@
 
 
 					<div class="form-group mb-4">
-						<label class="col-md-5 control-label h5" for="date">Data
+						<label class="col-md-5 control-label h5" for="dia">Data
 							de disponibilidade</label>
 
 						<div>
-							<input name="Data" placeholder="Data disponibilidade"
-								class="form-control " type="text">
+							<input name="dia" placeholder="Data disponibilidade"
+								class="form-control" type="text">
 						</div>
 
 					</div>

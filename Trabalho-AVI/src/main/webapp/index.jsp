@@ -23,38 +23,36 @@
 	<section class="d-flex">
 		<div class="container">
 			<div class="row justify-content-center">
-				<form class="col col-md-12">
+
+				<div class="panel panel-primary col-md-12">
+					<div class="mb-3 display-3 h5">Menu Inicial</div>
+				</div>
+
+				<div>
 
 
-					<div class="panel panel-primary col-md-12">
-						<div class="mb-3 display-3 h5">Menu Inicial</div>
-					</div>
+					<a href="./cadastro.jsp">
+						<button type="button" class="btn btn-primary btn-lg btn-block">Cadastrar
+							Coordenador</button>
+					</a>
 
-					<div>
-
-
-						<a href="./cadastro.jsp">
-							<button type="button" class="btn btn-primary btn-lg btn-block">Cadastrar
-								Coordenador</button>
-						</a> 
-						<aa href="">
-							<button type="button" class="btn btn-primary btn-lg btn-block">Exibir
-								coordenadores Cadastrados</button>
-
-						</a>
-						 <a href="">
-							<button type="button" class="btn btn-primary btn-lg btn-block">editar
-								coordenadores</button>
-
-						</a>
+					<form action="./app" method="post">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Exibir
+							coordenadores Cadastrados</button>
+					</form>
 
 
-						<%-- 				<input name="qtdCursos" placeholder="Qtd cursos a coordenar"
+					<form action="./excluirCoordenadores" method="post">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">excluir
+							coordenadores</button>
+					</form>
+					
+					
+					<%-- 				<input name="qtdCursos" placeholder="Qtd cursos a coordenar"
 							class="form-control" type="text" /> <span style="color: red;">${erro}</span><br> --%>
+				</div>
 
-					</div>
 
-				</form>
 
 			</div>
 		</div>

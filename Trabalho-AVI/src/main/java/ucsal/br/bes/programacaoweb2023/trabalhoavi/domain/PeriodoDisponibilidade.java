@@ -11,7 +11,6 @@ public class PeriodoDisponibilidade {
 
 	public PeriodoDisponibilidade(String diaDisponibilidade, String horaInicialAtendimento,
 			String horaFinalAtendimento) {
-		super();
 		this.diaDisponibilidade = diaDisponibilidade;
 		this.horaInicialAtendimento = horaInicialAtendimento;
 		this.horaFinalAtendimento = horaFinalAtendimento;
@@ -43,8 +42,8 @@ public class PeriodoDisponibilidade {
 
 	@Override
 	public String toString() {
-		return "PeriodoDisponibilidade [diaDisponibilidade=" + diaDisponibilidade + ", horaInicialAtendimento="
-				+ horaInicialAtendimento + ", horaFinalAtendimento=" + horaFinalAtendimento + "]";
+		return "Dia: " + diaDisponibilidade + "]" + "[Hora Inicial Atendimento:" + horaInicialAtendimento + "]"
+				+ "[Hora Final Atendimento:" + horaFinalAtendimento;
 	}
 
 }

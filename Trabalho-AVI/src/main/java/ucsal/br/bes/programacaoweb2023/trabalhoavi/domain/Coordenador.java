@@ -13,7 +13,6 @@ public class Coordenador {
 	private List<PeriodoDisponibilidade> disponibilidade = new ArrayList<>();
 
 	public Coordenador(String nome, List<Curso> cursos, List<PeriodoDisponibilidade> disponibilidade) {
-		super();
 		this.nome = nome;
 		this.cursos = cursos;
 		this.disponibilidade = disponibilidade;
@@ -66,7 +65,7 @@ public class Coordenador {
 
 	@Override
 	public String toString() {
-		return "Coordenador [nome=" + nome + ", cursos=" + cursos + ", disponibilidade=" + disponibilidade + "]";
+		return "nome=" + nome + ", cursos=" + cursos + ", disponibilidade=" + disponibilidade;
 	}
 
 }

@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ucsal.br.bes.programacaoweb2023.trabalhoavi.persistence.CoordenadoresDao;
 
-@WebServlet("/listarCoordenadores")
-public class ListarCoordenadores extends HttpServlet {
+@WebServlet("/excluirCoordenadores")
+public class ExcluirCoordenadoresController extends HttpServlet {
 
 	/**
 	 * 
@@ -20,10 +20,28 @@ public class ListarCoordenadores extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		
+		String nome = req.getParameter("nome");
+
+		int indice = -1;
+		for (int i = 0; i < CoordenadoresDao.listarCoordenadores().size(); i++) {
+			if (CoordenadoresDao.listarCoordenadores().get(i).getNome().equals(nome)) {
+				indice = i;
+
+			}
+		}
+		if (indice != -1)
+			CoordenadoresDao.listarCoordenadores().remove(indice);
+		resp.sendRedirect("/index.jsp");
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
 		req.setAttribute("coordenadores", CoordenadoresDao.listarCoordenadores());
 		
-		req.getRequestDispatcher("exibirCoordenadores.jsp").forward(req, resp);;
+		req.getRequestDispatcher("removerCoordenador.jsp").forward(req, resp);;
+		
 	}
 
 }

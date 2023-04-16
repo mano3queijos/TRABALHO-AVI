@@ -20,7 +20,7 @@ import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.PeriodoDisponibilidade
 import ucsal.br.bes.programacaoweb2023.trabalhoavi.persistence.CoordenadoresDao;
 
 @WebServlet("/app")
-public class app extends HttpServlet {
+public class salvaCoordenadores extends HttpServlet {
 
 	private boolean acaoRealizada = false;
 
@@ -30,10 +30,20 @@ public class app extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 //	Aqui precisa ter apenas um dopost, pq preciso fazer a confirmação das outras
-	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+//		
+//		teste listar coordenadores
+		req.setAttribute("coordenadores", CoordenadoresDao.listarCoordenadores());
+
+		req.getRequestDispatcher("exibirCoordenadores.jsp").forward(req, resp);
+
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
 
@@ -46,34 +56,27 @@ public class app extends HttpServlet {
 					cursos.add(curso);
 				}
 			}
-
-			String dataDisponibilidade = req.getParameter("dataDisponibilidade");
+			List<PeriodoDisponibilidade> periodoDisponibilidade = new ArrayList<>();
+			String dia = req.getParameter("dia");
 			String horaInicial = req.getParameter("horarioInicial");
 			String horaFinal = req.getParameter("horaFinal");
-			List<PeriodoDisponibilidade> periodoDisponibilidade = new ArrayList<>();
-
-			PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(dataDisponibilidade, horaInicial, horaFinal);
+			PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(dia, horaInicial, horaFinal);
 			periodoDisponibilidade.add(periodo);
 
 			String nome = req.getParameter("nome");
 			Coordenador coordenador = new Coordenador(nome, cursos, periodoDisponibilidade);
 			CoordenadoresDao.adicionar(coordenador);
-//			
-//			teste listar coordenadores
-//			req.setAttribute("coordenadores", CoordenadoresDao.listarCoordenadores());
-//			
-//			req.getRequestDispatcher("exibirCoordenadores.jsp").forward(req, resp);;
 
 			for (Coordenador mostra : CoordenadoresDao.listarCoordenadores()) {
-				System.out.println(mostra);
+				System.out.println(mostra.getDisponibilidade());
 			}
+			
+			resp.sendRedirect("./index.jsp");
 
 		} catch (Exception e) {
 			System.out.println("eu não faço a minima ideia kkkkkkkkkkkkk");
 
 		}
-
-		
 
 	}
 }
