@@ -29,7 +29,7 @@
 	<section class="d-flex">
 		<div class="container">
 			<div class="row justify-content-center">
-				<form action="./editar" method="get" class="col col-md-12">
+				<form action="./verificarId" method="post" class="col col-md-12">
 
 
 

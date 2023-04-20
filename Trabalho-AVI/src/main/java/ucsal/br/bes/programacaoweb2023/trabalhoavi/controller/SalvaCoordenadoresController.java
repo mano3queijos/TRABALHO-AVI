@@ -29,8 +29,7 @@ public class SalvaCoordenadoresController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//		
-//		teste listar coordenadores
+
 		req.setAttribute("coordenadores", CoordenadoresDao.getList());
 
 		req.getRequestDispatcher("exibirCoordenadores.jsp").forward(req, resp);
@@ -47,7 +46,6 @@ public class SalvaCoordenadoresController extends HttpServlet {
 			req.getSession().setAttribute("qtdHorario", qtdHorario);
 			Coordenador.validarQtdHorario(repQtdHorario);
 
-			System.out.println(repQtdHorario);
 			CadastrarHorariosController.qtdRep = repQtdHorario;
 
 			List<PeriodoDisponibilidade> pd = new ArrayList<>();

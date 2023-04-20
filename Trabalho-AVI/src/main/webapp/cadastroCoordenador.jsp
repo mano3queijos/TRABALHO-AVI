@@ -4,7 +4,7 @@
 	import="ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Coordenador"%>
 <%@page
 	import="ucsal.br.bes.programacaoweb2023.trabalhoavi.exception.ValidarException"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -66,16 +66,13 @@
 
 					</div>
 
-					<div class="form-group mb-4 col-md-12">
-						<%-- 	<label class="col-md-12 control-label h5" for="curso">Cadastrar
-							curso</label> <input type="hidden" name="qtdHorario"
-							value="${qtdHorario}" />
- --%>
+					<div class="form-group col-md-12">
+
 						<c:forEach begin="1"
 							end="${not empty param.qtdHorario ? param.qtdHorario : session.qtdHorario}"
 							varStatus="loop">
 
-							<br>
+					
 
 							<h3 class="mb-4">Disponibilidade ${loop.index}</h3>
 
@@ -93,7 +90,7 @@
 								</div>
 
 
-								<div class="form-group mb-4 col-md-4">
+								<div class="form-group mb-1 col-md-4">
 									<label class="control-label h5">Horario inicial</label>
 									<div>
 										<input name="horarioInicial${loop.index}"
@@ -102,7 +99,7 @@
 									</div>
 								</div>
 
-								<div class="form-group mb-4 col-md-4">
+								<div class="form-group mb-1 col-md-4">
 
 
 									<label class="control-label h5">Horario final</label>
