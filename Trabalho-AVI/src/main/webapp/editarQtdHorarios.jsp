@@ -37,7 +37,7 @@
 			<div class="row justify-content-center">
 
 
-					<input type="text" name="id" value="${id}">
+					<input type="hidden" name="id" value="${id}">
 
 
 				<form action="./editarQtdH" method="post" class="col col-md-10">
