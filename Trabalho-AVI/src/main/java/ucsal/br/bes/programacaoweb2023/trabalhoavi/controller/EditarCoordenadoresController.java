@@ -22,7 +22,7 @@ public class EditarCoordenadoresController extends HttpServlet {
 	/**
 	 * 
 	 */
-	static Integer index =-1;
+	static Integer index =0;
 	private static final long serialVersionUID = 1L;
 	private Coordenador coordenador;
 
@@ -76,11 +76,12 @@ public class EditarCoordenadoresController extends HttpServlet {
 			CadastrarHorariosController.qtdRep = repQtdHorario;
 			List<PeriodoDisponibilidade> pd = new ArrayList<>();
 
-			for (int i = 0; i <= repQtdHorario; i++) {
+			for (int i = 1; i <= repQtdHorario; i++) {
 
 				String horaInicial = req.getParameter("horarioInicial" + i);
 				String horaFinal = req.getParameter("horaFinal" + i);
 				String dia = req.getParameter("dia" + i);
+				Coordenador.validarQtdHorarios(dia, horaInicial, horaFinal);
 				PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(dia, horaInicial, horaFinal);
 				pd.add(periodo);
 			}
