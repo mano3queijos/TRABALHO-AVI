@@ -1,4 +1,5 @@
 package ucsal.br.bes.programacaoweb2023.trabalhoavi.domain;
+
 //
 //import java.time.LocalDate;
 //import java.time.LocalTime;
@@ -42,8 +43,8 @@ public class PeriodoDisponibilidade {
 
 	@Override
 	public String toString() {
-		return "Dia: " + diaDisponibilidade + "]" + "[Hora Inicial Atendimento:" + horaInicialAtendimento + "]"
-				+ "[Hora Final Atendimento:" + horaFinalAtendimento;
+		return "[Dia: " + diaDisponibilidade + ", " + "Hora Inicial:" + horaInicialAtendimento + ", " + "Hora Final:"
+				+ horaFinalAtendimento + "]";
 	}
 
 }

@@ -39,7 +39,8 @@
 				<form action="./salvar" method="post" class="col col-md-10">
 
 
-					<input type="text" name="qtdHorario" value="${qtdHorario}">
+					<input type="hidden" name="qtdHorario"
+						value="${not empty param.qtdHorario ? param.qtdHorario : session.qtdHorario}">
 					<div class="panel panel-primary">
 						<div class="mb-3 display-3 h5">Cadastro de Coordenadores</div>
 					</div>
@@ -70,7 +71,9 @@
 							curso</label> <input type="hidden" name="qtdHorario"
 							value="${qtdHorario}" />
  --%>
-						<c:forEach begin="1" end="${qtdHorario}" varStatus="loop">
+						<c:forEach begin="1"
+							end="${not empty param.qtdHorario ? param.qtdHorario : session.qtdHorario}"
+							varStatus="loop">
 
 							<br>
 

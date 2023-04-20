@@ -44,7 +44,9 @@ public class SalvaCoordenadoresController extends HttpServlet {
 
 			String qtdHorario = req.getParameter("qtdHorario");
 			Integer repQtdHorario = Integer.parseInt(qtdHorario);
+			req.getSession().setAttribute("qtdHorario", qtdHorario);
 			Coordenador.validarQtdHorario(repQtdHorario);
+
 			System.out.println(repQtdHorario);
 			CadastrarHorariosController.qtdRep = repQtdHorario;
 

@@ -71,8 +71,8 @@ public class EditarCoordenadoresController extends HttpServlet {
 //			System.out.println("e2ef"+index);
 			String qtdHorario = req.getParameter("qtdHorario");
 			Integer repQtdHorario = Integer.parseInt(qtdHorario);
+			req.getSession().setAttribute("qtdHorario", qtdHorario);
 			Coordenador.validarQtdHorario(repQtdHorario);
-			System.out.println(repQtdHorario);
 			CadastrarHorariosController.qtdRep = repQtdHorario;
 			List<PeriodoDisponibilidade> pd = new ArrayList<>();
 

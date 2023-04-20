@@ -28,22 +28,20 @@
 <body>
 
 
-<%-- 	<c:set var="qtdHorario" value="${requestScope.qtdHorario}" />
+	<%-- 	<c:set var="qtdHorario" value="${requestScope.qtdHorario}" />
  --%>
 	<section class="d-flex">
 		<div class="container">
 			<div class="row justify-content-center">
 
-
-
 				<form action="./editar" method="post" class="col col-md-10">
 
-
-					<input type="text" name="qtdHorario" value="${qtdHorario}">
-					<input type="text" name="id" value="${index}">
-
+					<input type="hidden" name="qtdHorario"
+						value="${not empty param.qtdHorario ? param.qtdHorario : session.qtdHorario}">
+<%-- 					<input type="hidden" name="id" value="${index}">
+ --%>
 					<div class="panel panel-primary">
-						<div class="mb-3 display-3 h5">Cadastro de Coordenadores</div>
+						<div class="mb-3 display-3 h5">Edição de coordenadores</div>
 					</div>
 					<div class="form-group mb-4">
 						<label class="control-label h5" for="Nome"> Nome do
@@ -72,7 +70,9 @@
 							curso</label> <input type="hidden" name="qtdHorario"
 							value="${qtdHorario}" />
  --%>
-						<c:forEach begin="1" end="${qtdHorario}" varStatus="loop">
+						<c:forEach begin="1"
+							end="${not empty param.qtdHorario ? param.qtdHorario : session.qtdHorario}"
+							varStatus="loop">
 
 							<br>
 
