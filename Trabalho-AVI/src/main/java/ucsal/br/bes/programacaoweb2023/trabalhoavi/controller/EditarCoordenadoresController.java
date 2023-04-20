@@ -22,6 +22,7 @@ public class EditarCoordenadoresController extends HttpServlet {
 	/**
 	 * 
 	 */
+	static Integer index =-1;
 	private static final long serialVersionUID = 1L;
 	private Coordenador coordenador;
 
@@ -32,9 +33,12 @@ public class EditarCoordenadoresController extends HttpServlet {
 			Integer posicaoEncontrada = -1;
 			String id = req.getParameter("id");
 			Integer idvalue = Integer.parseInt(id);
-			for (int i = 0; i < CoordenadoresDao.getList().size(); i++) {
+			index = idvalue;
+			for (int i = 0; i <= CoordenadoresDao.getList().size(); i++) {
 				if (CoordenadoresDao.getList().get(i).getId() == idvalue) {
 					posicaoEncontrada = i;
+					req.setAttribute("id", idvalue);
+
 					break;
 				}
 			}
@@ -45,8 +49,7 @@ public class EditarCoordenadoresController extends HttpServlet {
 				throw new ValidarException("posição não encontrada");
 			}
 
-			req.setAttribute("id", id);
-			req.getRequestDispatcher("./editarCoordenador.jsp").forward(req, resp);
+			req.getRequestDispatcher("./editarQtdHorarios.jsp").forward(req, resp);
 
 		} catch (ValidarException e) {
 			req.setAttribute("erroId", "o id do coordenador não existe");
@@ -65,6 +68,7 @@ public class EditarCoordenadoresController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
+//			System.out.println("e2ef"+index);
 			String qtdHorario = req.getParameter("qtdHorario");
 			Integer repQtdHorario = Integer.parseInt(qtdHorario);
 			Coordenador.validarQtdHorario(repQtdHorario);
@@ -73,10 +77,10 @@ public class EditarCoordenadoresController extends HttpServlet {
 			List<PeriodoDisponibilidade> pd = new ArrayList<>();
 
 			for (int i = 0; i <= repQtdHorario; i++) {
+
 				String horaInicial = req.getParameter("horarioInicial" + i);
 				String horaFinal = req.getParameter("horaFinal" + i);
 				String dia = req.getParameter("dia" + i);
-				Coordenador.validarQtdHorarios(dia, horaInicial, horaFinal);
 				PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(dia, horaInicial, horaFinal);
 				pd.add(periodo);
 			}
@@ -85,13 +89,9 @@ public class EditarCoordenadoresController extends HttpServlet {
 
 			String nome = req.getParameter("nome");
 
-			String id = req.getParameter("id");
+			for (int i = 0; i < CoordenadoresDao.getList().size(); i++) {
 
-			Integer idValue = Integer.parseInt(id);
-
-			for (int i = 0; i <= repQtdHorario; i++) {
-
-				if (CoordenadoresDao.getList().get(i).getId() == idValue) {
+				if (CoordenadoresDao.getList().get(i).getId() == index) {
 					CoordenadoresDao.getList().get(i).setCursos(cursos);
 					CoordenadoresDao.getList().get(i).setNome(nome);
 					CoordenadoresDao.getList().get(i).setDisponibilidade(pd);

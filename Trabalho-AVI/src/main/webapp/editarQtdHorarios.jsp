@@ -37,14 +37,17 @@
 			<div class="row justify-content-center">
 
 
-				<form action="./salvarQtdH" method="post" class="col col-md-10">
+					<input type="text" name="id" value="${id}">
+
+
+				<form action="./editarQtdH" method="post" class="col col-md-10">
 					<div class="panel panel-primary">
-						<div class="mb-2 display-3 h5">Cadastro de coordenadores</div>
+						<div class="mb-2 display-3 h5">Edição de coordenador de Coordenadores</div>
 					</div>
 
 					<div class="form-group mb-3">
 						<label class="control-label h5" for="Nome"> Defina a
-							quantidade de horários</label>
+							quantidade de horários de disponibilidade de cada coordenador </label>
 
 						<div>
 							<input name="qtdHorario" placeholder="Qtd Horários"

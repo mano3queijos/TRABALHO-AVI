@@ -80,7 +80,7 @@ public class Coordenador {
 			throws ValidarException {
 
 		if (dia == null || dia.isEmpty() || horaInicial == null || horaFinal == null|| horaFinal.isEmpty() || horaInicial.isEmpty() ) {
-			String mensagem = "Nenhum campo não pode estar vazio, coordenador não cadastrado";
+			String mensagem = "Nenhum campo pode estar vazio, coordenador não cadastrado";
 			throw new ValidarException(mensagem);
 		}
 

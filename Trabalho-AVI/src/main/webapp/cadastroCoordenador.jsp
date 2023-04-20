@@ -55,8 +55,8 @@
 
 
 					<div class="form-group mb-1 col-md-12">
-						<label class="col-md-5 control-label h5" for="curso">Cadastrar
-							curso</label> <input type="text" name="curso"
+						<label class="col-md-5 control-label h5" for="curso">
+							cursos</label> <input type="text" name="curso"
 							placeholder="Cadastrar Curso" class="form-control mb-4">
 						<br>
 

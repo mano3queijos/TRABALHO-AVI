@@ -8,8 +8,6 @@
 	pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:useBean id="Coordenadores" scope="session"
-	class="java.util.ArrayList"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,139 +28,94 @@
 <body>
 
 
-	<%
-	// tive q usar scriplet aqui, desculpa
-		// Verifica se o usuário informou a quantidade de cursos
-		try {
-			String qtdCursosStr = request.getParameter("qtdCursos");
-			int qtdCursos = 0;
-			if (qtdCursosStr != null && !qtdCursosStr.isEmpty()) {
-		qtdCursos = Integer.parseInt(qtdCursosStr);
-		Coordenador.validarQtdHorario(qtdCursos);
-			}
-
-		} catch (NumberFormatException e) {
-
-			String mensagem = "Por favor, insira apenas numero";
-			request.setAttribute("erroNumFormat", mensagem);
-
-		} catch (ValidarException e) {
-			request.setAttribute("erroValid", e.getMessage());
-
-		}
-	%>
-
-	<c:set var="qtdCursosForm" value="${not empty param.quantidade}" />
-
+<%-- 	<c:set var="qtdHorario" value="${requestScope.qtdHorario}" />
+ --%>
 	<section class="d-flex">
 		<div class="container">
 			<div class="row justify-content-center">
 
 
-				<form method="post" class="col col-md-10">
-
-
-					<div class="panel panel-primary">
-						<div class="mb-3 display-3 h5">Editar Coordenador</div>
-					</div>
-
-					<div class="form-group mb-4">
-						<label class="col-md-5 control-label h5" for="quantidade">Quantidade
-							Cursos:</label> <input type="number" class="form-control" id="quantidade"
-							name="quantidade" min="1" max="10"><br>
-
-						<button type="submit" name="Cancelar" class="btn btn-primary"
-							type="submit">confirmar</button>
-						<%-- <span style="color: red;">${erroNumFormat}</span> <span
-							style="color: red;">${erroValid}</span> <br> <span
-							style="color: red;">${erroQtd}</span> <br> --%>
-					</div>
-				</form>
 
 				<form action="./editar" method="post" class="col col-md-10">
 
 
-					//id <input type="text" name="id"
-						value="<%= request.getAttribute("id") %>"
-						<c:if test="${not qtdCursosForm}">disabled</c:if> />
+					<input type="text" name="qtdHorario" value="${qtdHorario}">
+					<input type="text" name="id" value="${index}">
 
+					<div class="panel panel-primary">
+						<div class="mb-3 display-3 h5">Cadastro de Coordenadores</div>
+					</div>
 					<div class="form-group mb-4">
 						<label class="control-label h5" for="Nome"> Nome do
 							Coordenador </label>
 
-
-
 						<div>
 							<input name="nome" placeholder="Nome do coordenador"
-								class="form-control" type="text"
-								<c:if test="${not qtdCursosForm}">disabled</c:if>> <span
-								style="color: red;">${erro}</span><br>
+								class="form-control" type="text">
 						</div>
 					</div>
 
 
-					<div class="form-group mb-4">
-						<label class="col-md-5 control-label h5" for="dia">Data de
-							disponibilidade</label>
-
-						<div>
-							<input name="dia" placeholder="Data disponibilidade"
-								class="form-control" type="text"
-								<c:if test="${not qtdCursosForm}">disabled</c:if>> <span
-								style="color: red;">${erro}</span><br>
-						</div>
-
-					</div>
-
-
-
-					<div class="row">
-
-						<div class="form-group mb-4 col-md-6">
-							<label class="control-label h5" for="curso">Horario
-								inicial</label>
-							<div>
-								<input name="horarioInicial" placeholder="horario inicial"
-									class="form-control" type="text"
-									<c:if test="${not qtdCursosForm}">disabled</c:if>> <span
-									style="color: red;">${erro}</span><br>
-							</div>
-						</div>
-
-						<div class="form-group mb-4 col-md-6">
-
-
-							<label class="control-label h5" for="curso">Horario final</label>
-							<div>
-								<input name="horaFinal" placeholder="horario final"
-									class="form-control" type="text"
-									<c:if test="${not qtdCursosForm}">disabled</c:if>> <span
-									style="color: red;">${erro}</span><br>
-							</div>
-						</div>
-
-
-					</div>
-
-
-
-
-
-					<div class="form-group mb-4 col-md-6">
+					<div class="form-group mb-1 col-md-12">
 						<label class="col-md-5 control-label h5" for="curso">Cadastrar
-							curso</label>
+							curso</label> <input type="text" name="curso"
+							placeholder="Cadastrar Curso" class="form-control mb-4">
+						<br>
 
-						<c:if test="${not empty param.quantidade}">
-							<c:set var="qtdCursos" value="${param.quantidade}" />
-							<input type="hidden" name="qtdCursos" value="${qtdCursos}" />
 
-							<c:forEach begin="0" end="${qtdCursos-1}" varStatus="loop">
-								<input type="text" name="nomeCursos${loop.index}"
-									placeholder="Cadastrar Curso" class="form-control mb-4"
-									<c:if test="${not qtdCursosForm}">disabled</c:if>>
-								<br>
-							</c:forEach>
-						</c:if>
+
+
+					</div>
+
+					<div class="form-group mb-4 col-md-12">
+						<%-- 	<label class="col-md-12 control-label h5" for="curso">Cadastrar
+							curso</label> <input type="hidden" name="qtdHorario"
+							value="${qtdHorario}" />
+ --%>
+						<c:forEach begin="1" end="${qtdHorario}" varStatus="loop">
+
+							<br>
+
+							<h3 class="mb-4">Disponibilidade ${loop.index}</h3>
+
+							<div class="row">
+								<div class="form-group col-md-4">
+									<label class="control-label h5">Dia </label>
+
+									<div>
+										<input name="dia${loop.index}"
+											placeholder="Data disponibilidade" class="form-control"
+											type="text">
+
+									</div>
+
+								</div>
+
+
+								<div class="form-group mb-4 col-md-4">
+									<label class="control-label h5">Horario inicial</label>
+									<div>
+										<input name="horarioInicial${loop.index}"
+											placeholder="horario inicial" class="form-control"
+											type="text">
+									</div>
+								</div>
+
+								<div class="form-group mb-4 col-md-4">
+
+
+									<label class="control-label h5">Horario final</label>
+									<div>
+										<input name="horaFinal${loop.index}"
+											placeholder="horario final" class="form-control" type="text">
+									</div>
+								</div>
+								<hr>
+
+
+							</div>
+						</c:forEach>
+
 
 
 					</div>
@@ -172,6 +125,9 @@
 
 					<h1>
 						<span style="color: red;">${erroCadastro}</span><br>
+					</h1>
+					<h1>
+						<span style="color: red;">${erroQtd}</span><br>
 					</h1>
 
 					<div class="col-md-8">
