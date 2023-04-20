@@ -1,4 +1,4 @@
-package br.ucsal.bes.programacaoweb2023.trabalhoavi.exception;
+package ucsal.br.bes.programacaoweb2023.trabalhoavi.exception;
 
 public class ValidarException extends Exception {
 

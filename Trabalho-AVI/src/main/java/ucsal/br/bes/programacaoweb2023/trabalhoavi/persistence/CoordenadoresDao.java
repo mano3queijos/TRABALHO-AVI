@@ -8,9 +8,7 @@ import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Coordenador;
 public class CoordenadoresDao {
 
 	private static List<Coordenador> coordenadores = new ArrayList<>();
-	
-	
-	
+
 	public static void adicionar(Coordenador coordenador) {
 		coordenadores.add(coordenador);
 	}
@@ -24,7 +22,7 @@ public class CoordenadoresDao {
 		coordenadores.set(posAtt, coordenador);
 	}
 
-	public static List<Coordenador> listarCoordenadores() {
-		return new ArrayList<>(coordenadores);
+	public static List<Coordenador> getList() {
+		return coordenadores;
 	}
 }

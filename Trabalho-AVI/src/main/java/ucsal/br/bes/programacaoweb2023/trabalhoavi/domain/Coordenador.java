@@ -3,21 +3,21 @@ package ucsal.br.bes.programacaoweb2023.trabalhoavi.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ucsal.bes.programacaoweb2023.trabalhoavi.exception.ValidarException;
-import jakarta.servlet.RequestDispatcher;
+import ucsal.br.bes.programacaoweb2023.trabalhoavi.exception.ValidarException;
 
 public class Coordenador {
 
 	private Integer id;
 	private String nome;
-	private List<Curso> cursos = new ArrayList<>();
+	private String cursos;
 	private List<PeriodoDisponibilidade> disponibilidade = new ArrayList<>();
 
 	private static int index = 0;
 
-	public Coordenador(String nome, List<Curso> cursos, List<PeriodoDisponibilidade> disponibilidade) {
+	public Coordenador(String nome, String cursos, List<PeriodoDisponibilidade> disponibilidade) {
 
 		index = index + 1;
+		this.id = index;
 		this.nome = nome;
 		this.cursos = cursos;
 		this.disponibilidade = disponibilidade;
@@ -39,11 +39,11 @@ public class Coordenador {
 		this.nome = nome;
 	}
 
-	public List<Curso> getCursos() {
+	public String getCursos() {
 		return cursos;
 	}
 
-	public void setCursos(List<Curso> cursos) {
+	public void setCursos(String cursos) {
 		this.cursos = cursos;
 	}
 
@@ -55,19 +55,19 @@ public class Coordenador {
 		this.disponibilidade = disponibilidade;
 	}
 
-	public static void validarQtdCuros(Integer qtdCursos) throws ValidarException {
+	public static void validarQtdHorario(Integer qtdHorarios) throws ValidarException {
 
-		if (qtdCursos > 10) {
+		if (qtdHorarios > 5) {
 
-			String mensagem = "O coordenador não pode coordenar mais de 10 cursos por vês";
+			String mensagem = "O coordenadordenar mais de 10 cursos por vês";
 			throw new ValidarException(mensagem);
 
-		} else if (qtdCursos == 0) {
+		} else if (qtdHorarios == 0 || qtdHorarios == null) {
 
 			String mensagem = "O coordenador precisa coordenar pelo menos um curso";
 			throw new ValidarException(mensagem);
 
-		} else if (qtdCursos < 0) {
+		} else if (qtdHorarios < 0) {
 
 			String mensagem = "O coordenador não pode coordenar um numero negativo de cursos";
 			throw new ValidarException(mensagem);
@@ -76,10 +76,10 @@ public class Coordenador {
 
 	}
 
-	public static void validarCadastroCursos(String nome, String dia, String horaInicial, String horaFinal)
+	public static void validarQtdHorarios(String dia, String horaInicial, String horaFinal)
 			throws ValidarException {
 
-		if (nome == null | dia == null | horaInicial == null | horaFinal == null) {
+		if (dia == null || dia.isEmpty() || horaInicial == null || horaFinal == null|| horaFinal.isEmpty() || horaInicial.isEmpty() ) {
 			String mensagem = "Nenhum campo não pode estar vazio, coordenador não cadastrado";
 			throw new ValidarException(mensagem);
 		}
@@ -97,7 +97,7 @@ public class Coordenador {
 
 	@Override
 	public String toString() {
-		return "nome=" + nome + ", cursos=" + cursos + ", disponibilidade=" + disponibilidade;
+		return "nome=" + nome + ", cursos=" + cursos + ", disponibilidade=" + disponibilidade + ", id= " + id;
 	}
 
 }

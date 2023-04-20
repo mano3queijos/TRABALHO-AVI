@@ -45,6 +45,7 @@
 								<th class="text-center" scope="col">Nome</th>
 								<th class="text-center" scope="col">Cursos</th>
 								<th class="text-center" scope="col">Disponibilidade</th>
+								<th class="text-center" scope="col">ID</th>
 							</tr>
 
 
@@ -61,6 +62,7 @@
 											value="${coordenadores.cursos}" /></td>
 									<td class="text-center"><c:out
 											value="${coordenadores.disponibilidade}" /></td>
+									<td class="text-center"><c:out value="${coordenadores.id}" /></td>
 
 								</tr>
 
@@ -74,19 +76,21 @@
 
 					</table>
 
-					<form action="./excluirCoordenadores" method="post"
+					<form action="./excluir" method="post"
 						class="col col-md-12  table-bordered w-75 mx-auto">
 
 
 						<div class="form-group mb-4">
-							<label class="control-label h5" for="Nome"> Nome do
-								Coordenador a ser excluido</label>
-
+							<label class="control-label h5" for="Nome">Id do
+								coordenador que deseja excluir</label>
 
 							<div>
-								<input name="nome" placeholder="Nome do coordenador"
-									class="form-control" type="text">
+								<input name="id" placeholder="Id Coordenador"
+									class="form-control" type="text" /> <span style="color: red;">${erro}</span><br>
 							</div>
+
+							<span style="color: red;">${erroId}</span>
+
 						</div>
 
 
@@ -97,9 +101,12 @@
 								<button type="submit" name="prosseguir" class="btn btn-success"
 									type="Submit">prosseguir</button>
 
+								<a href="./index.jsp">
 
-								<button type="submit" name="Cancelar" class="btn btn-danger"
-									type="submit">Cancelar</button>
+									<button type="button" name="Cancelar" class="btn btn-danger"
+										type="submit">Cancelar</button>
+
+								</a>
 							</div>
 						</div>
 					</form>

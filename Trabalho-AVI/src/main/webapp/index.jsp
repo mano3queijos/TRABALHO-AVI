@@ -31,25 +31,30 @@
 				<div>
 
 
-					<a href="./cadastro.jsp">
+					<a href="./salvarQtdHorario.jsp">
 						<button type="button" class="btn btn-primary btn-lg btn-block">Cadastrar
 							Coordenador</button>
 					</a>
 
-					<form action="./app" method="get">
+					<form action="./salvar" method="get">
 						<button type="submit" class="btn btn-primary btn-lg btn-block">Exibir
 							coordenadores Cadastrados</button>
 					</form>
 
 
-					<form action="./excluirCoordenadores" method="get">
+					<form action="./excluir" method="get">
 						<button type="submit" class="btn btn-primary btn-lg btn-block">excluir
 							coordenadores</button>
 					</form>
-					
-					
-					<%-- 				<input name="qtdCursos" placeholder="Qtd cursos a coordenar"
-							class="form-control" type="text" /> <span style="color: red;">${erro}</span><br> --%>
+
+
+					<a href="./confirmarIdCoordenador.jsp">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Editar
+							Coordenadores</button>
+
+					</a>
+
+
 				</div>
 
 

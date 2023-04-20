@@ -1,16 +1,17 @@
 package ucsal.br.bes.programacaoweb2023.trabalhoavi.controller;
 
 import java.io.IOException;
-import java.util.List;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ucsal.br.bes.programacaoweb2023.trabalhoavi.domain.Coordenador;
+import ucsal.br.bes.programacaoweb2023.trabalhoavi.exception.ValidarException;
+import ucsal.br.bes.programacaoweb2023.trabalhoavi.persistence.CoordenadoresDao;
 
-@WebServlet("/excluirCoordenadores")
+@WebServlet("/excluir")
 public class ExcluirCoordenadoresController extends HttpServlet {
 
 	/**
@@ -21,37 +22,52 @@ public class ExcluirCoordenadoresController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		List<Coordenador> coordenadores = (List<Coordenador>) req.getSession().getAttribute("coordenadores");
+		try {
+			String id = req.getParameter("id");
 
-		String nome = req.getParameter("nome");
+			Integer idValue = Integer.parseInt(id);
+			int indice = -1;
+			for (int i = 0; i < CoordenadoresDao.getList().size(); i++) {
+				if (CoordenadoresDao.getList().get(i).getId() == idValue) {
+					indice = i;
+					break;
 
-		int indice = -1;
-		for (int i = 0; i < coordenadores.size(); i++) {
-			if (coordenadores.get(i).getNome().equals(nome)) {
-				indice = i;
-
+				}
 			}
-		}
-		if (indice != -1)
-			coordenadores.remove(indice);
+			if (indice != -1) {
+				CoordenadoresDao.getList().remove(indice);
 
-		System.out.println(coordenadores);
-		resp.sendRedirect("./index.jsp");
-//		resp.sendRedirect("./exibirCoordenadores.jsp");
-//
+			} else {
+				throw new ValidarException("posição não encontrada");
+			}
+
+			System.out.println(CoordenadoresDao.getList());
+			resp.sendRedirect("./index.jsp");
+
+		} catch (NullPointerException e) {
+			req.setAttribute("erroExist", "não tem coordenador cadastrado");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./removerCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+		} catch (ValidarException e) {
+			req.setAttribute("erroId", "o id do coordenador não existe");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./removerCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+
+		} catch(NumberFormatException e) {
+			req.setAttribute("erroId", "coloque apenas numero meu casa");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./removerCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+			
+		}
 
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		List<Coordenador> coordenadores = (List<Coordenador>) req.getSession().getAttribute("coordenadores");
 
+		req.setAttribute("coordenadores", CoordenadoresDao.getList());
 
-		req.setAttribute("coordenadores", coordenadores);
-
-		req.getRequestDispatcher("removerCoordenador.jsp").forward(req, resp);
-		
+		req.getRequestDispatcher("./removerCoordenador.jsp").forward(req, resp);
 
 	}
 

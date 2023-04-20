@@ -1,8 +1,8 @@
 package ucsal.br.bes.programacaoweb2023.trabalhoavi.domain;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
+//
+//import java.time.LocalDate;
+//import java.time.LocalTime;
+//
 public class PeriodoDisponibilidade {
 
 	private String diaDisponibilidade;
