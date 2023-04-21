@@ -342,6 +342,10 @@ private static final long serialVersionUID = 1L;
 ```
 
 
+
+
+![image](https://user-images.githubusercontent.com/101946589/233522793-e8581e07-5dfc-43d5-b0c6-3362a8cab014.png)
+
 ```ruby
 static Integer qtdRep = 0;
 	/**
@@ -382,10 +386,3 @@ static Integer qtdRep = 0;
 
 
 
-
-
-
-
-
- 
-s
