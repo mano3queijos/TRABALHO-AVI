@@ -344,7 +344,7 @@ private static final long serialVersionUID = 1L;
 
 
 
-![image](https://user-images.githubusercontent.com/101946589/233522793-e8581e07-5dfc-43d5-b0c6-3362a8cab014.png)
+>![image](https://user-images.githubusercontent.com/101946589/233522793-e8581e07-5dfc-43d5-b0c6-3362a8cab014.png)
 
 ```ruby
 static Integer qtdRep = 0;
@@ -384,5 +384,63 @@ static Integer qtdRep = 0;
 
 ```
 
+Seguindo a logica do sistema de cadastro, o sistema de dição leva pra uma jsp que irá pegar os dados do coordenador
+>![image](https://user-images.githubusercontent.com/101946589/233523039-24f331ec-8e30-4518-9475-fab349c02a44.png)
+
+A jsp envia os dados pra uma servlet, essa servlet verifica o tratamento de erro e, caso não ocorra nenhum erro, coloca as informações do coordenador na posição baseada na posição do id recebido
+```ruby
+
+
+		try {
+			String qtdHorario = req.getParameter("qtdHorario");
+			Integer repQtdHorario = Integer.parseInt(qtdHorario);
+			req.getSession().setAttribute("qtdHorario", qtdHorario);
+			Coordenador.validarQtdHorario(repQtdHorario);
+			CadastrarHorariosController.qtdRep = repQtdHorario;
+			List<PeriodoDisponibilidade> pd = new ArrayList<>();
+
+			for (int i = 1; i <= repQtdHorario; i++) {
+
+				String horaInicial = req.getParameter("horarioInicial" + i);
+				String horaFinal = req.getParameter("horaFinal" + i);
+				String dia = req.getParameter("dia" + i);
+				Coordenador.validarQtdHorarios(dia, horaInicial, horaFinal);
+				PeriodoDisponibilidade periodo = new PeriodoDisponibilidade(dia, horaInicial, horaFinal);
+				pd.add(periodo);
+			}
+
+			String cursos = req.getParameter("curso");
+
+			String nome = req.getParameter("nome");
+
+			for (int i = 0; i < CoordenadoresDao.getList().size(); i++) {
+
+				if (CoordenadoresDao.getList().get(i).getId() == VerificarIdEdicao.index) {
+					CoordenadoresDao.getList().get(i).setCursos(cursos);
+					CoordenadoresDao.getList().get(i).setNome(nome);
+					CoordenadoresDao.getList().get(i).setDisponibilidade(pd);
+
+				}
+			}
+
+			resp.sendRedirect("./index.jsp");
+
+		} catch (ValidarException e) {
+
+			req.setAttribute("erroCadastro", e.getMessage());
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./cadastroCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+
+		} catch (NumberFormatException e) {
+
+			req.setAttribute("erroQtd", "O campo não pode ser nulo");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./cadastroCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+
+		}
+
+	}
+
+```
 
 
