@@ -143,6 +143,8 @@ A jsp manda as infromações do coordenador pra servlet que irá fazer o tratame
 
 ## Exibir Coordenadores: 
 Ao acessar esse funcionalidade, o usuario chamsa uma servlet que manda as informações da lista de coordenadores para auma jsp que irá fazer a aexibição da lisrta de coordenadores em forma de uma tabela 
+>![image](https://user-images.githubusercontent.com/101946589/233519527-91ef43fa-592c-429f-a5d6-8e006096a1c3.png)
+
 ```ruby
 @Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -232,6 +234,152 @@ Ao acessar esse funcionalidade, o usuario chamsa uma servlet que manda as inform
 	</div>
 ```
 
+## Remover Coordenador 
+Ao acessar essa funcionalidade, o usuario é rediceionado a uma jsp que recebe o id do coordenador que irá ser removido, na jsp tambem é mostarada a lista de coordenadores com o id deles(O id é um atributo< com valor inicial de 0, que é atribuido a um novo coordenador a cada novo cadastro)
+
+>![image](https://user-images.githubusercontent.com/101946589/233517124-599e6f5e-067a-465a-bde6-cdf624e0f9b7.png)
+
+
+A jsp manda o valor do id recebeido a servlet que vai fazer o tratamento de erro e, caso não ocorra nehnhum erro, fazer a verificação de qual coordenador ela deve remover da lista de coordenadores
+
+
+```ruby
+
+@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		try {
+			String id = req.getParameter("id");
+
+			Integer idValue = Integer.parseInt(id);
+			int indice = -1;
+			for (int i = 0; i < CoordenadoresDao.getList().size(); i++) {
+				if (CoordenadoresDao.getList().get(i).getId() == idValue) {
+					indice = i;
+					break;
+
+				}
+			}
+			if (indice != -1) {
+				CoordenadoresDao.getList().remove(indice);
+
+			} else {
+				throw new ValidarException("posição não encontrada");
+			}
+
+			System.out.println(CoordenadoresDao.getList());
+			resp.sendRedirect("./index.jsp");
+
+		} catch (NullPointerException e) {
+			req.setAttribute("erroExist", "não tem coordenador cadastrado");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./removerCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+		} catch (ValidarException e) {
+			req.setAttribute("erroId", "o id do coordenador não existe");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./removerCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+
+		} catch(NumberFormatException e) {
+			req.setAttribute("erroId", "coloque apenas numero meu casa");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./removerCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+			
+		}
+
+	}
+
+
+```
+## Editar Coordenador
+Ao clicar nessa funcionalidade o usuario é redirecionada a uma sercvlet que manda infromações da lsita de coordenadores e redireciona o usuario a um jsp que irá receber o id do coordenador que o usuario deseja editar, essa jsp manda dados para uma servlet que irá fazer o tratamento de erro e, caso não ocorra nenhum erro, adiciona o id recebido a um atributo estático que irá ser usado para a edição da posição do coordenador em outra servlet, após isso, a servlet redireciona a uma jsp que irá receber os dados de quantidade de horário editadas(mesmas funcionalidade do cadastro, porem com actions diferentes) 
+
+
+![image](https://user-images.githubusercontent.com/101946589/233520800-f6330481-2876-4289-83d2-3dcd4157944f.png)
+
+```ruby
+
+private static final long serialVersionUID = 1L;
+	static Integer index = 0;
+
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+
+			Integer posicaoEncontrada = -1;
+			String id = req.getParameter("id");
+			Integer idvalue = Integer.parseInt(id);
+			index = idvalue;
+			for (int i = 0; i < CoordenadoresDao.getList().size(); i++) {
+				if (CoordenadoresDao.getList().get(i).getId() == idvalue) {
+					posicaoEncontrada = i;
+					req.setAttribute("id", idvalue);
+					break;
+				}
+			}
+
+			if (posicaoEncontrada != -1) {
+				CoordenadoresDao.getList().get(posicaoEncontrada);
+			} else {
+				throw new ValidarException("posição não encontrada");
+			}
+
+			req.getRequestDispatcher("./editarQtdHorarios.jsp").forward(req, resp);
+
+		} catch (ValidarException e) {
+			req.setAttribute("erroId", "o id do coordenador não existe");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./confirmarIdCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+
+		} catch (NumberFormatException e) {
+			req.setAttribute("erroId", "Coloque apenas numero meu casa");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./confirmarIdCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+		}
+
+	}
+
+```
+
+
+```ruby
+static Integer qtdRep = 0;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		try {
+
+			String qtdHorario = req.getParameter("qtdHorario");
+			Integer qtd = Integer.parseInt(qtdHorario);
+			Coordenador.validarQtdHorario(qtd);
+			qtdRep = qtd;
+			HttpSession session = req.getSession();
+			session.setAttribute("qtdHorario", qtd);
+			req.setAttribute("qtdHorario", qtd);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./editarCoordenador.jsp");
+			requestDispatcher.forward(req, resp);
+
+		} catch (ValidarException e) {
+			req.setAttribute("erroQtd", e.getMessage());
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./salvarQtdHorario.jsp");
+			requestDispatcher.forward(req, resp);
+
+		} catch (NumberFormatException e) {
+
+			req.setAttribute("erroQtd", "O campo não pode ser nulo");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("./salvarQtdHorario.jsp");
+			requestDispatcher.forward(req, resp);
+
+		}
+	}
+
+```
+
 
 
 
@@ -240,3 +388,4 @@ Ao acessar esse funcionalidade, o usuario chamsa uma servlet que manda as inform
 
 
  
+s
